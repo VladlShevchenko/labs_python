@@ -5,21 +5,20 @@ from datetime import datetime
 class Pizza:
     """Pizza class with getters, setters"""
 
-    def __init__(self, day, name, price, ingredients):
-        self.__day = day
+    def __init__(self, name, price, ingredients):
         self.__name = name
         self.__price = price
         self.__ingredients = ingredients
 
-    @property
-    def day(self):
-        return self.__day
-
-    @day.setter
-    def day(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Wrong input type!")
-        self.__day = value
+    # @property
+    # def day(self):
+    #     return self.__day
+    #
+    # @day.setter
+    # def day(self, value):
+    #     if not isinstance(value, str):
+    #         raise TypeError("Wrong input type!")
+    #     self.__day = value
 
     @property
     def name(self):
@@ -54,52 +53,52 @@ class Pizza:
         self.__ingredients = values
 
     def __str__(self):
-        return f'Weekday: {self.day},\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class MondayPizza(Pizza):
 
     def __str__(self):
-        return f'Monday,\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Monday\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class TuesdayPizza(Pizza):
 
     def __str__(self):
-        return f'Tuesday: {self.day},\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Tuesday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class WednesdayPizza(Pizza):
     def __str__(self):
-        return f'Wednesday: {self.day},\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Wednesday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class ThursdayPizza(Pizza):
     def __str__(self):
-        return f'Thursday: {self.day},\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Thursday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class FridayPizza(Pizza):
 
     def __str__(self):
-        return f'Friday: {self.day},\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Friday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class SaturdayPizza(Pizza):
     def __str__(self):
-        return f'Saturday: {self.day},\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Saturday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class SundayPizza(Pizza):
     def __str__(self):
-        return f'Sunday: {self.day},\n pizza: name {self.name}\n price: {self.price}, \n ' \
+        return f'Sunday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
@@ -167,7 +166,7 @@ class Order:
 
     def write_data(self):
         data = {'customer name': self.new_customer.name,
-                'day': self.pizza.day,
+                'day': datetime.today().strftime('%A'),
                 'name': self.pizza.name,
                 'price': self.pizza.price,
                 'ingredients': self.ingredients
@@ -200,11 +199,11 @@ def deserialization(pizzarito):
         pizza_of_the_day = json.load(file)
     for pizza_toppings in pizza_of_the_day:
         if pizza_toppings["day"] == datetime.today().strftime('%A'):
-            return pizzarito(pizza_toppings["day"], pizza_toppings["name"], pizza_toppings["price"],
+            return pizzarito(pizza_toppings["name"], pizza_toppings["price"],
                              pizza_toppings["ingredients"])
 
 
-customer = Customer("Vladyslav", "Shevchenko")
+customer = Customer("Shevchenko", "Vladyslav")
 pizza = fabric()
 print(pizza)
 order = Order(customer, pizza)

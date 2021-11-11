@@ -1,0 +1,44 @@
+[
+  {
+    "day": "Monday",
+    "name": "Hawaiian",
+    "price": 120,
+    "ingredients": ["pizza sauce", "mozzarella", "ham", "pineapple"]
+  },
+  {
+    "day": "Tuesday",
+    "name": "Margarita",
+    "price": 110,
+    "ingredients": ["mozzarella", "basil", "olive oil", "salt"]
+  },
+  {
+    "day": "Wednesday",
+    "name": "Pepperoni",
+    "price": 130,
+    "ingredients": ["mozzarella", "pepperoni ", "olive oil", "basil"]
+  },
+  {
+    "day": "Thursday",
+    "name": "Capricciosa",
+    "price": 120,
+    "ingredients": ["pizza sauce", "mozzarella", "ham", "artichoke", "mushrooms", "olives"]
+  },
+  {
+    "day": "Friday",
+    "name": "Prosciutto and rocket",
+    "price": 110,
+    "ingredients": ["mozzarella", "prosciutto", "olive oil", "arugula"]
+  },
+  {
+    "day": "Saturday",
+    "name": "Supreme",
+    "price": 140,
+    "ingredients": ["mozzarella", "bacon", "onion", "beef mince", "capsicum", "pepperoni", "mushroom", "olives"]
+  },
+  {
+    "day": "Sunday",
+    "name": "BBQ Meatlovers",
+    "price": 150,
+    "ingredients": ["BBQ sauce", "mozzarella", "pepperoni", "bacon", "beef mince", "ham"]
+  }
+]

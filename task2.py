@@ -10,16 +10,6 @@ class Pizza:
         self.__price = price
         self.__ingredients = ingredients
 
-    # @property
-    # def day(self):
-    #     return self.__day
-    #
-    # @day.setter
-    # def day(self, value):
-    #     if not isinstance(value, str):
-    #         raise TypeError("Wrong input type!")
-    #     self.__day = value
-
     @property
     def name(self):
         return self.__name

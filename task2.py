@@ -49,6 +49,9 @@ class Pizza:
 
 class MondayPizza(Pizza):
 
+    def __init__(self, name, price, ingredients):
+        super().__init__(name, price, ingredients)
+
     def __str__(self):
         return f'Monday\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
@@ -56,18 +59,29 @@ class MondayPizza(Pizza):
 
 class TuesdayPizza(Pizza):
 
+    def __init__(self, name, price, ingredients):
+        super().__init__(name, price, ingredients)
+
     def __str__(self):
         return f'Tuesday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class WednesdayPizza(Pizza):
+
+    def __init__(self, name, price, ingredients):
+        super().__init__(name, price, ingredients)
+
     def __str__(self):
         return f'Wednesday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class ThursdayPizza(Pizza):
+
+    def __init__(self, name, price, ingredients):
+        super().__init__(name, price, ingredients)
+
     def __str__(self):
         return f'Thursday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
@@ -75,18 +89,29 @@ class ThursdayPizza(Pizza):
 
 class FridayPizza(Pizza):
 
+    def __init__(self, name, price, ingredients):
+        super().__init__(name, price, ingredients)
+
     def __str__(self):
         return f'Friday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class SaturdayPizza(Pizza):
+
+    def __init__(self, name, price, ingredients):
+        super().__init__(name, price, ingredients)
+
     def __str__(self):
         return f'Saturday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
 
 
 class SundayPizza(Pizza):
+
+    def __init__(self, name, price, ingredients):
+        super().__init__(name, price, ingredients)
+
     def __str__(self):
         return f'Sunday:\n pizza: name {self.name}\n price: {self.price}, \n ' \
                f'ingredients: {self.ingredients}'
@@ -161,36 +186,37 @@ class Order:
                 'price': self.pizza.price,
                 'ingredients': self.ingredients
                 }
-        with open("order.json", "w") as write_file:
-            json.dump(data, write_file)
+        try:
+            with open("order.json", "w") as write_file:
+                json.dump(data, write_file)
+        except FileNotFoundError:
+            raise FileNotFoundError("File not found")
 
 
 def fabric():
     current_date = datetime.today().strftime('%A')
-
-    if current_date == "Monday":
-        return deserialization(MondayPizza)
-    elif current_date == "Tuesday":
-        return deserialization(TuesdayPizza)
-    elif current_date == "Wednesday":
-        return deserialization(WednesdayPizza)
-    elif current_date == "Thursday":
-        return deserialization(ThursdayPizza)
-    elif current_date == "Friday":
-        return deserialization(FridayPizza)
-    elif current_date == "Saturday":
-        return deserialization(SaturdayPizza)
-    elif current_date == "Sunday":
-        return deserialization(SundayPizza)
-
-
-def deserialization(pizzarito):
-    with open("pizza_of_the_day.json", 'r') as file:
-        pizza_of_the_day = json.load(file)
-    for pizza_toppings in pizza_of_the_day:
-        if pizza_toppings["day"] == datetime.today().strftime('%A'):
-            return pizzarito(pizza_toppings["name"], pizza_toppings["price"],
-                             pizza_toppings["ingredients"])
+    try:
+        with open("pizza_of_the_day.json", 'r') as file:
+            pizza_days = json.load(file)
+    except FileNotFoundError:
+        raise FileNotFoundError("File not found")
+    for pizza_day in pizza_days:
+        if pizza_day["day"] == current_date:
+            if current_date == "Monday":
+                return MondayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+            if current_date == "Tuesday":
+                return TuesdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+            if current_date == "Wednesday":
+                return WednesdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+            if current_date == "Thursday":
+                return ThursdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+            if current_date == "Friday":
+                return FridayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+            if current_date == "Saturday":
+                return SaturdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+            if current_date == "Sunday":
+                return SundayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+    return None
 
 
 customer = Customer("Shevchenko", "Vladyslav")

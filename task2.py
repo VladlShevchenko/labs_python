@@ -193,34 +193,35 @@ class Order:
             raise FileNotFoundError("File not found")
 
 
-def fabric():
+def find_pizza():
     current_date = datetime.today().strftime('%A')
     try:
         with open("pizza_of_the_day.json", 'r') as file:
             pizza_days = json.load(file)
     except FileNotFoundError:
         raise FileNotFoundError("File not found")
+
+    day = None
     for pizza_day in pizza_days:
-        if pizza_day["day"] == current_date:
-            if current_date == "Monday":
-                return MondayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if current_date == "Tuesday":
-                return TuesdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if current_date == "Wednesday":
-                return WednesdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if current_date == "Thursday":
-                return ThursdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if current_date == "Friday":
-                return FridayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if current_date == "Saturday":
-                return SaturdayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if current_date == "Sunday":
-                return SundayPizza(pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-    return None
+        if current_date == pizza_day["day"]:
+            day = pizza_day
+    if not day:
+        raise ValueError("Wrong day")
+    pizza_dict = {
+        "Monday": MondayPizza,
+        "Tuesday": TuesdayPizza,
+        "Wednesday": WednesdayPizza,
+        'Thursday': ThursdayPizza,
+        "Friday": FridayPizza,
+        "Saturday": SaturdayPizza,
+        "Sunday": SundayPizza
+    }
+    return pizza_dict[day["day"]](day["name"], day["price"],
+                                  day["ingredients"])
 
 
 customer = Customer("Shevchenko", "Vladyslav")
-pizza = fabric()
+pizza = find_pizza()
 print(pizza)
 order = Order(customer, pizza)
 order.add_ingredients()
